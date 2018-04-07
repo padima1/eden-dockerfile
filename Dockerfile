@@ -6,8 +6,8 @@ ENV EDENVERSION=1.0.2
 
 ENV EDENPREFIX=/eden/depends/x86_64-w64-mingw32 
 
-RUN apt-get update && apt-get install -y git build-essential wget pkg-config curl libtool autotools-dev automake libssl-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
-g++-mingw-w64-x86-64
+RUN apt-get update && apt-get install -y g++-mingw-w64-x86-64 git build-essential wget pkg-config curl libtool autotools-dev automake libssl-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
+
 WORKDIR /
 
 RUN mkdir -p /berkeleydb && git clone https://github.com/padima1/eden.git
