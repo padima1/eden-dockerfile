@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y libminiupnpc-dev libzmq3-dev libqt5gui5
 
 WORKDIR /eden
 
-RUN git checkout v${EDENVERSION} && mkdir -p /padima1/eden-${EDENVERSION}
+RUN  mkdir -p /padima1/eden-${EDENVERSION}
 
 WORKDIR /eden/depends
 
