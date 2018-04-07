@@ -48,4 +48,4 @@ RUN mv /padima1/eden-${EDENVERSION}${EDENPREFIX} /eden-${EDENVERSION} && strip /
 
 WORKDIR /
 
-RUN  eden-${EDENVERSION}.exe 
+RUN  zip eden-${EDENVERSION}.zip eden-${EDENVERSION}
