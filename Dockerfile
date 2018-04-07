@@ -34,7 +34,7 @@ WORKDIR /eden/depends
 
 RUN make
 
-WORKDIR /bitcoin
+WORKDIR /eden
 
 RUN ./autogen.sh
 
@@ -44,7 +44,7 @@ RUN make
 
 RUN make install DESTDIR=/eden/eden-${EDENVERSION}
 
-RUN mv /eden/eden-${EDENVERSION}${EDENPREFIX} /eden-${EDENVERSION} && strip /eden-${BTCVERSION}/bin/* && rm -rf /eden-${EDENVERSION}/lib/pkgconfig && find /eden-${EDENVERSION} -name "lib*.la" -delete && find /eden-${EDENVERSION} -name "lib*.a" -delete 
+RUN mv /eden/eden-${EDENVERSION}${EDENPREFIX} /eden-${EDENVERSION} && strip /eden-${EDENVERSION}/bin/* && rm -rf /eden-${EDENVERSION}/lib/pkgconfig && find /eden-${EDENVERSION} -name "lib*.la" -delete && find /eden-${EDENVERSION} -name "lib*.a" -delete 
 
 WORKDIR /
 
