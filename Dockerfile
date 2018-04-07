@@ -4,10 +4,10 @@ MAINTAINER Padima
 
 ENV EDENVERSION=1.0.2
 
-ENV EDENPREFIX=/eden/depends/x86_64-pc-linux-gnu
+ENV EDENPREFIX=/eden/depends/x86_64-w64-mingw32 -j4
 
 RUN apt-get update && apt-get install -y git build-essential wget pkg-config curl libtool autotools-dev automake libssl-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
-
+g++-mingw-w64-x86-64
 WORKDIR /
 
 RUN mkdir -p /berkeleydb && git clone https://github.com/padima1/eden.git
@@ -38,7 +38,7 @@ WORKDIR /eden
 
 RUN ./autogen.sh
 
-RUN ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/ -static-libstdc++" --with-gui --prefix=${BTCPREFIX} --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests --enable-static
+RUN ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}/lib/ -static-libstdc++" --with-gui --prefix=${EDENPREFIX} --disable-ccache --disable-maintainer-mode --disable-dependency-tracking --enable-glibc-back-compat --enable-reduce-exports --disable-bench --disable-gui-tests --enable-static
 
 RUN make 
 
@@ -48,4 +48,4 @@ RUN mv /padima1/eden-${EDENVERSION}${EDENPREFIX} /eden-${EDENVERSION} && strip /
 
 WORKDIR /
 
-RUN tar cvf eden-${EDENVERSION}.tar eden-${EDENVERSION} 
+RUN  eden-${EDENVERSION}.exe 
