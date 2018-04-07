@@ -1,16 +1,16 @@
 FROM ubuntu:14.04
 
-MAINTAINER Alex Foster version: 0.1
+MAINTAINER Padima
 
-ENV BTCVERSION=0.14.2
+ENV EDENVERSION=1.0.2
 
-ENV BTCPREFIX=/bitcoin/depends/x86_64-pc-linux-gnu
+ENV EDENPREFIX=/eden/depends/x86_64-pc-linux-gnu
 
 RUN apt-get update && apt-get install -y git build-essential wget pkg-config curl libtool autotools-dev automake libssl-dev libevent-dev bsdmainutils libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
 
 WORKDIR /
 
-RUN mkdir -p /berkeleydb && git clone https://github.com/bitcoin/bitcoin.git
+RUN mkdir -p /berkeleydb && git clone https://github.com/padima1/eden.git
 
 WORKDIR /berkeleydb
 
@@ -26,11 +26,11 @@ RUN make install
 
 RUN apt-get update && apt-get install -y libminiupnpc-dev libzmq3-dev libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler libqrencode-dev
 
-WORKDIR /bitcoin
+WORKDIR /Eden
 
-RUN git checkout v${BTCVERSION} && mkdir -p /bitcoin/bitcoin-${BTCVERSION}
+RUN git checkout v${EDENVERSION} && mkdir -p /eden/eden-${EDENVERSION}
 
-WORKDIR /bitcoin/depends
+WORKDIR /eden/depends
 
 RUN make
 
@@ -42,10 +42,10 @@ RUN ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}
 
 RUN make 
 
-RUN make install DESTDIR=/bitcoin/bitcoin-${BTCVERSION}
+RUN make install DESTDIR=/eden/eden-${EDENVERSION}
 
-RUN mv /bitcoin/bitcoin-${BTCVERSION}${BTCPREFIX} /bitcoin-${BTCVERSION} && strip /bitcoin-${BTCVERSION}/bin/* && rm -rf /bitcoin-${BTCVERSION}/lib/pkgconfig && find /bitcoin-${BTCVERSION} -name "lib*.la" -delete && find /bitcoin-${BTCVERSION} -name "lib*.a" -delete 
+RUN mv /eden/eden-${EDENVERSION}${EDENPREFIX} /eden-${EDENVERSION} && strip /eden-${BTCVERSION}/bin/* && rm -rf /eden-${EDENVERSION}/lib/pkgconfig && find /eden-${EDENVERSION} -name "lib*.la" -delete && find /eden-${EDENVERSION} -name "lib*.a" -delete 
 
 WORKDIR /
 
-RUN tar cvf bitcoin-${BTCVERSION}.tar bitcoin-${BTCVERSION} 
+RUN tar cvf eden-${EDENVERSION}.tar eden-${EDENVERSION} 
