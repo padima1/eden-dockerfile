@@ -26,9 +26,9 @@ RUN make install
 
 RUN apt-get update && apt-get install -y libminiupnpc-dev libzmq3-dev libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler libqrencode-dev
 
-WORKDIR /Eden
+WORKDIR /eden
 
-RUN git checkout v${EDENVERSION} && mkdir -p /eden/eden-${EDENVERSION}
+RUN git checkout v${EDENVERSION} && mkdir -p /padima1/eden-${EDENVERSION}
 
 WORKDIR /eden/depends
 
@@ -42,9 +42,9 @@ RUN ./configure CPPFLAGS="-I${BDB_PREFIX}/include/ -O2" LDFLAGS="-L${BDB_PREFIX}
 
 RUN make 
 
-RUN make install DESTDIR=/eden/eden-${EDENVERSION}
+RUN make install DESTDIR=/padima1/eden-${EDENVERSION}
 
-RUN mv /eden/eden-${EDENVERSION}${EDENPREFIX} /eden-${EDENVERSION} && strip /eden-${EDENVERSION}/bin/* && rm -rf /eden-${EDENVERSION}/lib/pkgconfig && find /eden-${EDENVERSION} -name "lib*.la" -delete && find /eden-${EDENVERSION} -name "lib*.a" -delete 
+RUN mv /padima1/eden-${EDENVERSION}${EDENPREFIX} /eden-${EDENVERSION} && strip /eden-${EDENVERSION}/bin/* && rm -rf /eden-${EDENVERSION}/lib/pkgconfig && find /eden-${EDENVERSION} -name "lib*.la" -delete && find /eden-${EDENVERSION} -name "lib*.a" -delete 
 
 WORKDIR /
 
